@@ -1,0 +1,10 @@
+# This folder now accepts admin-uploaded files (Admin -> Gallery), so treat
+# it like /uploads: never execute anything here, even if a stray script
+# ends up in it. captions.php is unaffected - the app reads it with PHP's
+# own require(), which this Apache-level block does not touch.
+php_flag engine off
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phps
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phps
+<FilesMatch "\.(php|phtml|php[0-9]|phps|pl|py|jsp|asp|sh|cgi)$">
+    Require all denied
+</FilesMatch>
